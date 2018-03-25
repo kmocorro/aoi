@@ -1,0 +1,2235 @@
+<!DOCTYPE html>
+<!-- 2018(c) Kevin Mocorro -->
+<html>
+<head>  
+    <title>Fab4Meta - <%= process_name %> - Realtime</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../dist/bootstrap/css/bootstrap.min.css">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="../dist/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../dist/ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <!-- Theme skin -->
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,300italic,400italic,600italic">-->
+
+</head>
+
+<body class="sidebar-mini skin-black sidebar-collapse">
+
+<div class="wrapper">
+ <header class="main-header">
+  <!-- Logo -->
+  <a href="#" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini">f4<span style="color:orange;margin:1px;">m</span></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg">fab4<span style="color:orange;margin:1px;">meta</span></span>
+      </a>
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+  
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <!--<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
+                <span class="hidden-xs">Client</span>
+              </a>
+              <ul class="dropdown-menu">
+                
+                <!-- Menu Body -->
+                <li class="user-body">
+                  <div class="pull-right">
+                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  </div>
+                  <!-- /.row -->
+                </li>
+              </ul>
+            </li>
+            <!-- Control Sidebar Toggle Button -->
+            <li>
+              <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            </li>
+          </ul>
+        </div>
+      </nav>  
+ </header>
+ 
+ <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+     
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <!--<li class="header"><span>FAB<span style="color:orange;margin:1px;">4</span></li>-->
+        <!--<li class="active treeview">-->
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Engineering</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Manufacturing</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Yield</a></li>
+          </ul>
+        </li>
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-hourglass-half"></i>
+            <span>Realtime</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+                <li><a href="/ntm"><i class="fa fa-circle-o"></i>NTM</a></li>
+                <li><a href="/ptm"><i class="fa fa-circle-o"></i>PTM</a></li>
+                <li><a href="/plm"><i class="fa fa-circle-o"></i>PLM</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-history"></i> <span>Reports</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Cycle time </a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> WIP & Outs </a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-database"></i>
+            <span>Services</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Andon board</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> CoA uploader</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Fab Lot extractor</a></li>
+          </ul>
+        </li>
+        
+        
+        <li class="header">ABOUT</li>
+        <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Information</span></a></li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        <%= process_name %>
+        <small>realtime</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Realtime</li>
+      </ol>
+    </section>
+
+    <!-- Main Body -->
+    <section class="content">
+
+        <!-- Main row -->
+        <div class="row">
+            <section class="col-lg-4">
+                <!-- Custom tabs (Charts with tabs)-->
+                <div class="nav-tabs-custom">
+                    <!-- Tabs within a box -->
+                    <ul class="nav nav-tabs pull-right">
+                        <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 17</li>
+                    </ul>
+                    <div class="tab-content no-padding">
+                        <div class="chart tab-pane active" id="NTM17-chart" style=" height: 300px;"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="col-lg-4">
+                <!-- Custom tabs (Charts with tabs)-->
+                <div class="nav-tabs-custom">
+                    <!-- Tabs within a box -->
+                    <ul class="nav nav-tabs pull-right">
+                        <li class="pull-left header"><i class="fa fa-bar-chart"></i> <%= process_name %> 1718</li>
+                    </ul>
+                    <div class="tab-content no-padding">
+                        <div class="chart tab-pane active" id="NTM1718-chart" style=" height: 300px;"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="col-lg-4">
+                <!-- Custom tabs (Charts with tabs)-->
+                <div class="nav-tabs-custom">
+                    <!-- Tabs within a box -->
+                    <ul class="nav nav-tabs pull-right">
+                        <li class="pull-left header"><i class="fa fa-bar-chart"></i> <%= process_name %> 18</li>
+                    </ul>
+                    <div class="tab-content no-padding">
+                        <div class="chart tab-pane active" id="NTM18-chart" style=" height: 300px;"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- second main row -->
+        <div class="row">
+                <section class="col-lg-4">
+                    <!-- Custom tabs (Charts with tabs) -->
+                    <div class="nav-tabs-custom">
+                        <!-- Tabs within a box -->
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 19</li>
+                        </ul>
+                        <div class="tab-content no-padding">
+                            <div class="chart tab-pane active" id="NTM19-chart" style=" height: 300px;"></div>
+                        </div>
+                    </div>
+                </section> 
+                <section class="col-lg-4">
+                    <!-- Custom tabs (Charts with tabs) -->
+                    <div class="nav-tabs-custom">
+                        <!-- Tabs within a box -->
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 1920</li>
+                        </ul>
+                        <div class="tab-content no-padding">
+                            <div class="chart tab-pane active" id="NTM1920-chart" style=" height: 300px;"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="col-lg-4">
+                    <!-- Custom tabs (Charts with tabs) -->
+                    <div class="nav-tabs-custom">
+                        <!-- Tabs within a box -->
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 20</li>
+                        </ul>
+                        <div class="tab-content no-padding">
+                            <div class="chart tab-pane active" id="NTM20-chart" style=" height: 300px;"></div>
+                        </div>
+                    </div>
+                </section> 
+        </div>
+        <!-- third main row -->
+        <div class="row">
+                <section class="col-lg-4">
+                    <!-- Custom tabs (Charts with tabs) -->
+                    <div class="nav-tabs-custom">
+                        <!-- Tabs within a box -->
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 21</li>
+                        </ul>
+                        <div class="tab-content no-padding">
+                            <div class="chart tab-pane active" id="NTM21-chart" style=" height: 300px;"></div>
+                        </div>
+                    </div>
+                </section> 
+                <section class="col-lg-4">
+                    <!-- Custom tabs (Charts with tabs) -->
+                    <div class="nav-tabs-custom">
+                        <!-- Tabs within a box -->
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 2122</li>
+                        </ul>
+                        <div class="tab-content no-padding">
+                            <div class="chart tab-pane active" id="NTM2122-chart" style=" height: 300px;"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="col-lg-4">
+                    <!-- Custom tabs (Charts with tabs) -->
+                    <div class="nav-tabs-custom">
+                        <!-- Tabs within a box -->
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 22</li>
+                        </ul>
+                        <div class="tab-content no-padding">
+                            <div class="chart tab-pane active" id="NTM22-chart" style=" height: 300px;"></div>
+                        </div>
+                    </div>
+                </section> 
+        </div>
+        <!-- fourth row -->
+        <div class="row">
+            <section class="col-lg-6">
+                    <!-- Custom tabs (Charts with tabs) -->
+                    <div class="nav-tabs-custom">
+                        <!-- Tabs within a box -->
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 22-2</li>
+                        </ul>
+                        <div class="tab-content no-padding">
+                            <div class="chart tab-pane active" id="NTM22-2-chart" style=" height: 300px;"></div>
+                        </div>
+                    </div>
+            </section> 
+            <section class="col-lg-6">
+                    <!-- Custom tabs (Charts with tabs) -->
+                    <div class="nav-tabs-custom">
+                        <!-- Tabs within a box -->
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 22-3</li>
+                        </ul>
+                        <div class="tab-content no-padding">
+                            <div class="chart tab-pane active" id="NTM22-3-chart" style=" height: 300px;"></div>
+                        </div>
+                    </div>
+            </section>
+        </div>
+    </section>
+
+    
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>v</b> 1.0.0
+    </div>
+    <div style="color:lightgray">
+      <strong> &copy; 2018 <a href="#">f4m</a></strong> | <strong>fab4</strong> <strong>m</strong>anufacturing & <strong>e</strong>ngineering <strong>t</strong>ool  <strong>a</strong>nalysis
+  </div>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- end of wrapper -->
+
+
+<script src="../dist/js/jquery.min.js"></script>
+<script src="../dist/js/jquery-ui.min.js"></script>
+<script src="../dist/js/bootstrap.min.js"></script>
+<script src="../dist/js/jquery.slimscroll.min.js"></script>
+<script src="../dist/js/fastclick.js"></script>
+<script src="../dist/js/adminlte.min.js"></script>
+<script src="../dist/js/plotly-latest.min.js"></script>
+<script src='../dist/js/socket.io.js'></script>
+
+<script> // summary checking for optimization
+    $(function(){
+        var socket=io();
+
+        // DATA & LAYOUT
+        var data_17 = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            showlegend: false,
+            marker: { size: 3,
+                color: '#0076be' },
+            line: {shape: 'spline'}
+        }];
+        var data_1718 = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            showlegend: false,
+            marker: { size: 3,
+                color: '#0076be' },
+            line: {shape: 'spline'}
+        }];
+        var data_18 = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            showlegend: false,
+            marker: { size: 3,
+                color: '#0076be' }
+        }];
+        var data_19 = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            showlegend: false,
+            marker: { size: 3,
+                color: '#0076be' }
+        }];
+        var data_1920 = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            showlegend: false,
+            marker: { size: 3,
+                color: '#0076be' }
+        }];
+        var data_20 = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            showlegend: false,
+            marker: { size: 3,
+                color: '#0076be' }
+        }];
+        var data_21 = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            showlegend: false,
+            marker: { size: 3,
+                color: '#0076be' }
+        }];
+        var data_2122 = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            showlegend: false,
+            marker: { size: 3,
+                color: '#0076be' }
+        }];
+        var data_22 = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            showlegend: false,
+            marker: { size: 3,
+                color: '#0076be' }
+        }];
+        var data_22_2 = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            showlegend: false,
+            marker: { size: 3,
+                color: '#0076be' }
+        }];
+        var data_22_3 = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            showlegend: false,
+            marker: { size: 3,
+                color: '#0076be' }
+        }];
+        
+        if('<%= process_name %>' == 'PLM'){
+            var layout_17 = {
+                title: '<%= process_name %>17 Delta Squeegee',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [51, 89],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 80.0,
+                        x1: 1,
+                        y1: 80.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 60.0,
+                        x1: 1,
+                        y1: 60.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_1718 = {
+                title: '<%= process_name %>1718 Delta Squeegee',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [51, 89],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 80.0,
+                        x1: 1,
+                        y1: 80.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 60.0,
+                        x1: 1,
+                        y1: 60.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_18 = {
+                title: '<%= process_name %>18 Delta Squeegee',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [51, 89],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 80.0,
+                        x1: 1,
+                        y1: 80.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 60.0,
+                        x1: 1,
+                        y1: 60.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_19 = {
+                title: '<%= process_name %>19 Delta Squeegee',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [51, 89],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 80.0,
+                        x1: 1,
+                        y1: 80.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 60.0,
+                        x1: 1,
+                        y1: 60.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_1920 = {
+                title: '<%= process_name %>1920 Delta Squeegee',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [51, 89],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 80.0,
+                        x1: 1,
+                        y1: 80.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 60.0,
+                        x1: 1,
+                        y1: 60.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_20 = {
+                title: '<%= process_name %>20 Delta Squeegee',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [51, 89],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 80.0,
+                        x1: 1,
+                        y1: 80.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 60.0,
+                        x1: 1,
+                        y1: 60.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_21 = {
+                title: '<%= process_name %>21 Delta Squeegee',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [51, 89],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 80.0,
+                        x1: 1,
+                        y1: 80.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 60.0,
+                        x1: 1,
+                        y1: 60.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_2122 = {
+                title: '<%= process_name %>2122 Delta Squeegee',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [51, 89],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 80.0,
+                        x1: 1,
+                        y1: 80.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 60.0,
+                        x1: 1,
+                        y1: 60.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_22 = {
+                title:'<%= process_name %>22 Delta Squeegee',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [51, 89],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 80.0,
+                        x1: 1,
+                        y1: 80.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 60.0,
+                        x1: 1,
+                        y1: 60.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_22_2 = {
+                title: '<%= process_name %>22-2 Delta Squeegee',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [51, 89],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 80.0,
+                        x1: 1,
+                        y1: 80.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 60.0,
+                        x1: 1,
+                        y1: 60.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_22_3 = {
+                title: '<%= process_name %>22-3 Delta Squeegee',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [51, 89],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 80.0,
+                        x1: 1,
+                        y1: 80.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 60.0,
+                        x1: 1,
+                        y1: 60.0,
+                        line:{
+                            color: 'rgb(265, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+        } else {
+
+            var layout_17 = {
+                title: '<%= process_name %>17 Squeegee Pressure',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [49, 84],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                
+            }
+            var layout_1718 = {
+                title: '<%= process_name %>1718 Squeegee Pressure',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [49, 84],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_18 = {
+                title: '<%= process_name %>18 Squeegee Pressure',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [49, 84],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_19 = {
+                title: '<%= process_name %>19 Squeegee Pressure',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [49, 84],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_1920 = {
+                title: '<%= process_name %>1920 Squeegee Pressure',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [49, 84],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_20 = {
+                title: '<%= process_name %>20 Squeegee Pressure',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [49, 84],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_21 = {
+                title: '<%= process_name %>21 Squeegee Pressure',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [49, 84],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_2122 = {
+                title: '<%= process_name %>2122 Squeegee Pressure',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [49, 84],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_22 = {
+                title: '<%= process_name %>22 Squeegee Pressure',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [49, 84],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_22_2 = {
+                title: '<%= process_name %>22-2 Squeegee Pressure',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [49, 84],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+            var layout_22_3 = {
+                title: '<%= process_name %>22-3 Squeegee Pressure',
+                    margin: {
+                        l: 50,
+                        r: 40,
+                        b: 50,
+                        t: 50,
+                        pad: 4
+                    },
+                xaxis: {
+                        type: 'date',
+                        domain: [0, 1]
+                    },
+                yaxis : {
+                        range: [49, 84],
+                        dtick: 5,
+                    },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                    
+            }
+        }
+        
+
+        Plotly.plot('NTM17-chart', data_17, layout_17, {displayModeBar: false});
+        Plotly.plot('NTM1718-chart', data_1718, layout_1718, {displayModeBar: false});
+        Plotly.plot('NTM18-chart', data_18, layout_18, {displayModeBar: false});
+        Plotly.plot('NTM19-chart', data_19, layout_19, {displayModeBar: false});
+        Plotly.plot('NTM1920-chart', data_1920, layout_1920, {displayModeBar: false});
+        Plotly.plot('NTM20-chart', data_20, layout_20, {displayModeBar: false});
+        Plotly.plot('NTM21-chart', data_21, layout_21, {displayModeBar: false});
+        Plotly.plot('NTM2122-chart', data_2122, layout_2122, {displayModeBar: false});
+        Plotly.plot('NTM22-chart', data_22, layout_22, {displayModeBar: false});
+        Plotly.plot('NTM22-2-chart', data_22_2, layout_22_2, {displayModeBar: false});
+        Plotly.plot('NTM22-3-chart', data_22_3, layout_22_3, {displayModeBar: false});
+
+        /** socket listeners */
+        socket.on('<%= process_name %>17_client', function(ntm17_obj){ //  listener
+            /** NTM17 chart */
+            var update = {
+                x: [[ntm17_obj[0]]],
+                y: [[ntm17_obj[4]]]
+            }
+
+            Plotly.extendTraces('NTM17-chart', update, [0]);
+        ////socket.emit('ntm17', dateAndTool_NTM1718);
+        });
+        socket.on('<%= process_name %>1718_client', function(ntm1718_obj){ //  listener
+            //console.log(linear_traces);
+            //console.log(ntm1718_obj);
+            /** NTM1718 chart
+            var data = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            scatter: {color: '#0076be'},
+            showlegend: false,
+            marker: { size: 3, color: '#0076be' }
+            }];
+
+            var layout = {
+                title: dateAndTool_NTM1718.tool_name + ' Squeegee Pressure',
+                margin: {
+                    l: 50,
+                    r: 40,
+                    b: 50,
+                    t: 50,
+                    pad: 4
+                },
+                xaxis: {
+                    type: 'date',
+                    domain: [0, 1]
+                },
+                yaxis : {
+                    range: [49, 84],
+                    dtick: 5,
+                },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                
+            }
+
+            Plotly.plot('NTM1718-chart', data, layout, {displayModeBar: false});
+            */
+            var update = {
+                x: [[ntm1718_obj[0]]],
+                y: [[ntm1718_obj[4]]]
+            }
+
+            Plotly.extendTraces('NTM1718-chart', update, [0]);
+        ////socket.emit('ntm1718', dateAndTool_NTM1718);
+        });
+        socket.on('<%= process_name %>18_client', function(ntm18_obj){ //  listener
+            //console.log(linear_traces);
+            //console.log(ntm17_obj);
+            /** NTM18 chart 
+            var data = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            scatter: {color: '#0076be'},
+            showlegend: false,
+            marker: { size: 3, color: '#0076be' }
+            }];
+
+            var layout = {
+                title: dateAndTool_NTM18.tool_name + ' Squeegee Pressure',
+                margin: {
+                    l: 50,
+                    r: 40,
+                    b: 50,
+                    t: 50,
+                    pad: 4
+                },
+                xaxis: {
+                    type: 'date',
+                    domain: [0, 1]
+                },
+                yaxis : {
+                    range: [49, 84],
+                    dtick: 5,
+                },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                
+            }
+
+            Plotly.plot('NTM18-chart', data, layout, {displayModeBar: false});
+            */
+            var update = {
+                x: [[ntm18_obj[0]]],
+                y: [[ntm18_obj[4]]]
+            }
+
+            Plotly.extendTraces('NTM18-chart', update, [0]);
+        ////socket.emit('ntm18', dateAndTool_NTM18);
+        });
+        socket.on('<%= process_name %>19_client', function(ntm19_obj){ //  listener
+            //console.log(linear_traces);
+            //console.log(ntm17_obj);
+            /** NTM19 chart 
+            var data = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            showlegend: false,
+            marker: { size: 3,color: '#0076be'}
+            }];
+
+            var layout = {
+                title: dateAndTool_NTM19.tool_name + ' Squeegee Pressure',
+                margin: {
+                    l: 50,
+                    r: 40,
+                    b: 50,
+                    t: 50,
+                    pad: 4
+                },
+                xaxis: {
+                    type: 'date',
+                    domain: [0, 1]
+                },
+                yaxis : {
+                    range: [49, 84],
+                    dtick: 5,
+                },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                
+            }
+
+            Plotly.plot('NTM19-chart', data, layout, {displayModeBar: false});
+            */
+            var update = {
+                x: [[ntm19_obj[0]]],
+                y: [[ntm19_obj[4]]]
+            }
+
+            Plotly.extendTraces('NTM19-chart', update, [0]);
+        ////socket.emit('ntm19', dateAndTool_NTM19);
+        });
+        socket.on('<%= process_name %>1920_client', function(ntm1920_obj){ //  listener
+            //console.log(linear_traces);
+            //console.log(ntm17_obj);
+            /** NTM1920 chart 
+            var data = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            scatter: {color: '#0076be'},
+            showlegend: false,
+            marker: { size: 3, color: '#0076be' }
+            }];
+
+            var layout = {
+                title: dateAndTool_NTM1920.tool_name + ' Squeegee Pressure',
+                margin: {
+                    l: 50,
+                    r: 40,
+                    b: 50,
+                    t: 50,
+                    pad: 4
+                },
+                xaxis: {
+                    type: 'date',
+                    domain: [0, 1]
+                },
+                yaxis : {
+                    range: [49, 84],
+                    dtick: 5,
+                },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                
+            }
+
+            Plotly.plot('NTM1920-chart', data, layout, {displayModeBar: false});
+            */
+            var update = {
+                x: [[ntm1920_obj[0]]],
+                y: [[ntm1920_obj[4]]]
+            }
+
+            Plotly.extendTraces('NTM1920-chart', update, [0]);
+        ////socket.emit('ntm1920', dateAndTool_NTM1920);
+        });
+        socket.on('<%= process_name %>20_client', function(ntm20_obj){ //  listener
+            //console.log(linear_traces);
+            //console.log(ntm17_obj);
+            /** NTM17 chart 
+            var data = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            scatter: {color: '#0076be'},
+            showlegend: false,
+            marker: { size: 3, color: '#0076be' }
+            }];
+
+            var layout = {
+                title: dateAndTool_NTM20.tool_name + ' Squeegee Pressure',
+                margin: {
+                    l: 50,
+                    r: 40,
+                    b: 50,
+                    t: 50,
+                    pad: 4
+                },
+                xaxis: {
+                    type: 'date',
+                    domain: [0, 1]
+                },
+                yaxis : {
+                    range: [49, 84],
+                    dtick: 5,
+                },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                
+            }
+
+            Plotly.plot('NTM20-chart', data, layout, {displayModeBar: false});
+            */
+            var update = {
+                x: [[ntm20_obj[0]]],
+                y: [[ntm20_obj[4]]]
+            }
+
+            Plotly.extendTraces('NTM20-chart', update, [0]);
+        ////socket.emit('ntm20', dateAndTool_NTM20);
+        });
+        socket.on('<%= process_name %>21_client', function(ntm21_obj){ //  listener
+            //console.log(linear_traces);
+            //console.log(ntm17_obj);
+            /** NTM17 chart 
+            var data = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            scatter: {color: '#0076be'},
+            showlegend: false,
+            marker: { size: 3, color: '#0076be' }
+            }];
+
+            var layout = {
+                title: dateAndTool_NTM21.tool_name + ' Squeegee Pressure',
+                margin: {
+                    l: 50,
+                    r: 40,
+                    b: 50,
+                    t: 50,
+                    pad: 4
+                },
+                xaxis: {
+                    type: 'date',
+                    domain: [0, 1]
+                },
+                yaxis : {
+                    range: [49, 84],
+                    dtick: 5,
+                },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                
+            }
+
+            Plotly.plot('NTM21-chart', data, layout, {displayModeBar: false});
+            */
+            var update = {
+                x: [[ntm21_obj[0]]],
+                y: [[ntm21_obj[4]]]
+            }
+
+            Plotly.extendTraces('NTM21-chart', update, [0]);
+        ////socket.emit('ntm21', dateAndTool_NTM21);
+        });
+        socket.on('<%= process_name %>2122_client', function(ntm2122_obj){ //  listener
+            //console.log(linear_traces);
+            //console.log(ntm17_obj);
+            /** NTM17 chart
+            var data = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            scatter: {color: '#0076be'},
+            showlegend: false,
+            marker: { size: 3, color: '#0076be' }
+            }];
+
+            var layout = {
+                title: dateAndTool_NTM2122.tool_name + ' Squeegee Pressure',
+                margin: {
+                    l: 50,
+                    r: 40,
+                    b: 50,
+                    t: 50,
+                    pad: 4
+                },
+                xaxis: {
+                    type: 'date',
+                    domain: [0, 1]
+                },
+                yaxis : {
+                    range: [49, 84],
+                    dtick: 5,
+                },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                
+            }
+
+            Plotly.plot('NTM2122-chart', data, layout, {displayModeBar: false});
+             */
+            var update = {
+                x: [[ntm2122_obj[0]]],
+                y: [[ntm2122_obj[4]]]
+            }
+
+            Plotly.extendTraces('NTM2122-chart', update, [0]);
+        ////socket.emit('ntm2122', dateAndTool_NTM2122);
+        });
+        socket.on('<%= process_name %>22_client', function(ntm22_obj){ //  listener
+            //console.log(linear_traces);
+            //console.log(ntm17_obj);
+            /** NTM17 chart 
+            var data = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            scatter: {color: '#0076be'},
+            showlegend: false,
+            marker: { size: 3, color: '#0076be' }
+            }];
+
+            var layout = {
+                title: dateAndTool_NTM22.tool_name + ' Squeegee Pressure',
+                margin: {
+                    l: 50,
+                    r: 40,
+                    b: 50,
+                    t: 50,
+                    pad: 4
+                },
+                xaxis: {
+                    type: 'date',
+                    domain: [0, 1]
+                },
+                yaxis : {
+                    range: [49, 84],
+                    dtick: 5,
+                },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                
+            }
+
+            Plotly.plot('NTM22-chart', data, layout, {displayModeBar: false});
+            */
+            var update = {
+                x: [[ntm22_obj[0]]],
+                y: [[ntm22_obj[4]]]
+            }
+
+            Plotly.extendTraces('NTM22-chart', update, [0]);
+        ////socket.emit('ntm22', dateAndTool_NTM22);
+        });
+        socket.on('<%= process_name %>22-2_client', function(ntm222_obj){ //  listener
+            //console.log(linear_traces);
+            //console.log(ntm17_obj);
+            /** NTM17 chart 
+            var data = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            scatter: {color: '#0076be'},
+            showlegend: false,
+            marker: { size: 3, color: '#0076be' }
+            }];
+
+            var layout = {
+                title: dateAndTool_NTM222.tool_name + ' Squeegee Pressure',
+                margin: {
+                    l: 50,
+                    r: 40,
+                    b: 50,
+                    t: 50,
+                    pad: 4
+                },
+                xaxis: {
+                    type: 'date',
+                    domain: [0, 1]
+                },
+                yaxis : {
+                    range: [49, 84],
+                    dtick: 5,
+                },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                
+            }
+
+            Plotly.plot('NTM22-2-chart', data, layout, {displayModeBar: false});
+            */
+            var update = {
+                x: [[ntm222_obj[0]]],
+                y: [[ntm222_obj[4]]]
+            }
+
+            Plotly.extendTraces('NTM22-2-chart', update, [0]);
+        ////socket.emit('ntm22-2', dateAndTool_NTM222);
+        });
+        socket.on('<%= process_name %>22-3_client', function(ntm223_obj){ //  listener
+            //console.log(linear_traces);
+            //console.log(ntm17_obj);
+            /** NTM17 chart 
+            var data = [{
+            x: [],
+            y: [],
+            mode: 'lines',
+            type: 'scatter',
+            scatter: {color: '#0076be'},
+            showlegend: false,
+            marker: { size: 3, color: '#0076be' }
+            }];
+
+            var layout = {
+                title: dateAndTool_NTM223.tool_name + ' Squeegee Pressure',
+                margin: {
+                    l: 50,
+                    r: 40,
+                    b: 50,
+                    t: 50,
+                    pad: 4
+                },
+                xaxis: {
+                    type: 'date',
+                    domain: [0, 1]
+                },
+                yaxis : {
+                    range: [49, 84],
+                    dtick: 5,
+                },
+                shapes: [
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 75.0,
+                        x1: 1,
+                        y1: 75.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    },
+                    {
+                        type: 'line',
+                        xref: 'paper',
+                        x0: 0,
+                        y0: 55.0,
+                        x1: 1,
+                        y1: 55.0,
+                        line:{
+                            color: 'rgb(255, 0, 0)',
+                            width: 1,
+                            dash:'dot'
+                        }
+                    }
+                ],
+                
+            }
+
+            Plotly.plot('NTM22-3-chart', data, layout, {displayModeBar: false});
+            
+            */
+            var update = {
+                x: [[ntm223_obj[0]]],
+                y: [[ntm223_obj[4]]]
+            }
+
+            Plotly.extendTraces('NTM22-3-chart', update, [0]);
+        ////socket.emit('ntm22-3', dateAndTool_NTM223);
+        });
+
+    });
+</script>
+</body>
+</html>
