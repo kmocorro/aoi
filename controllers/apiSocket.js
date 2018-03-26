@@ -67,6 +67,25 @@ module.exports = function(io){
                     cleaner().then(function(data_arr){
                            
                         io.volatile.emit(logFile_obj.ntm.tool_name[j] + '_client', data_arr);
+
+                        function toCloudDB(){
+                            return new Promise(function(resolve, reject){
+
+                                mysqlCloud.poolCloud.getConnection(function(err, connection){
+                                    connection.query({
+                                        sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?',
+                                        values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4]]
+                                    },  function(err, results, fields){
+                                       //console.log('INSERTED!');
+                                    });
+                                    connection.release();
+
+                                });
+
+                            });
+                        }
+
+                        toCloudDB();
                         
                     });
 
@@ -130,6 +149,24 @@ module.exports = function(io){
                            
                                 io.volatile.emit(logFile_obj.ntm.tool_name[j] + '_client', data_arr);
                                 
+                                function toCloudDB(){
+                                    return new Promise(function(resolve, reject){
+        
+                                        mysqlCloud.poolCloud.getConnection(function(err, connection){
+                                            connection.query({
+                                                sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?',
+                                                values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4]]
+                                            },  function(err, results, fields){
+                                               //console.log('INSERTED!');
+                                            });
+                                            connection.release();
+        
+                                        });
+        
+                                    });
+                                }
+        
+                                toCloudDB();
                             });
                             
                         });
@@ -198,6 +235,25 @@ module.exports = function(io){
                    
                         io.volatile.emit(logFile_obj.ptm.tool_name[j] + '_client', data_arr);
                         
+                        function toCloudDB(){
+                            return new Promise(function(resolve, reject){
+
+                                mysqlCloud.poolCloud.getConnection(function(err, connection){
+                                    connection.query({
+                                        sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?',
+                                        values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4]]
+                                    },  function(err, results, fields){
+                                       //console.log('INSERTED!');
+                                    });
+                                    connection.release();
+
+                                });
+
+                            });
+                        }
+
+                        toCloudDB();
+
                     });
                 });
         
@@ -260,6 +316,24 @@ module.exports = function(io){
                            
                                 io.volatile.emit(logFile_obj.ptm.tool_name[j] + '_client', data_arr);
                                 
+                                function toCloudDB(){
+                                    return new Promise(function(resolve, reject){
+        
+                                        mysqlCloud.poolCloud.getConnection(function(err, connection){
+                                            connection.query({
+                                                sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?',
+                                                values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4]]
+                                            },  function(err, results, fields){
+                                               //console.log('INSERTED!');
+                                            });
+                                            connection.release();
+        
+                                        });
+        
+                                    });
+                                }
+        
+                                toCloudDB();
                             });
                         });
                 
@@ -329,6 +403,24 @@ module.exports = function(io){
                    
                         io.volatile.emit(logFile_obj.plm.tool_name[j] + '_client', data_arr);
                         
+                        function toCloudDB(){
+                            return new Promise(function(resolve, reject){
+
+                                mysqlCloud.poolCloud.getConnection(function(err, connection){
+                                    connection.query({
+                                        sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?',
+                                        values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4]]
+                                    },  function(err, results, fields){
+                                       //console.log('INSERTED!');
+                                    });
+                                    connection.release();
+
+                                });
+
+                            });
+                        }
+
+                        toCloudDB();
                     });
                 });
         
@@ -392,6 +484,24 @@ module.exports = function(io){
                            
                                 io.volatile.emit(logFile_obj.plm.tool_name[j] + '_client', data_arr);
                                 
+                                function toCloudDB(){
+                                    return new Promise(function(resolve, reject){
+        
+                                        mysqlCloud.poolCloud.getConnection(function(err, connection){
+                                            connection.query({
+                                                sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?',
+                                                values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4]]
+                                            },  function(err, results, fields){
+                                               //console.log('INSERTED!');
+                                            });
+                                            connection.release();
+        
+                                        });
+        
+                                    });
+                                }
+        
+                                toCloudDB();
                             });
                         });
                 
