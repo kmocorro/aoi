@@ -1499,734 +1499,108 @@
 
         /** socket listeners */
         socket.on('<%= process_name %>17_client', function(ntm17_obj){ //  listener
-            /** NTM17 chart */
+            
             var update = {
                 x: [[ntm17_obj[0]]],
                 y: [[ntm17_obj[4]]]
             }
 
             Plotly.extendTraces('NTM17-chart', update, [0]);
-        ////socket.emit('ntm17', dateAndTool_NTM1718);
+        
         });
         socket.on('<%= process_name %>1718_client', function(ntm1718_obj){ //  listener
-            //console.log(linear_traces);
-            //console.log(ntm1718_obj);
-            /** NTM1718 chart
-            var data = [{
-            x: [],
-            y: [],
-            mode: 'lines',
-            type: 'scatter',
-            scatter: {color: '#0076be'},
-            showlegend: false,
-            marker: { size: 3, color: '#0076be' }
-            }];
-
-            var layout = {
-                title: dateAndTool_NTM1718.tool_name + ' Squeegee Pressure',
-                margin: {
-                    l: 50,
-                    r: 40,
-                    b: 50,
-                    t: 50,
-                    pad: 4
-                },
-                xaxis: {
-                    type: 'date',
-                    domain: [0, 1]
-                },
-                yaxis : {
-                    range: [49, 84],
-                    dtick: 5,
-                },
-                shapes: [
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 75.0,
-                        x1: 1,
-                        y1: 75.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    },
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 55.0,
-                        x1: 1,
-                        y1: 55.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    }
-                ],
-                
-            }
-
-            Plotly.plot('NTM1718-chart', data, layout, {displayModeBar: false});
-            */
+        
             var update = {
                 x: [[ntm1718_obj[0]]],
                 y: [[ntm1718_obj[4]]]
             }
 
             Plotly.extendTraces('NTM1718-chart', update, [0]);
-        ////socket.emit('ntm1718', dateAndTool_NTM1718);
+        
         });
         socket.on('<%= process_name %>18_client', function(ntm18_obj){ //  listener
-            //console.log(linear_traces);
-            //console.log(ntm17_obj);
-            /** NTM18 chart 
-            var data = [{
-            x: [],
-            y: [],
-            mode: 'lines',
-            type: 'scatter',
-            scatter: {color: '#0076be'},
-            showlegend: false,
-            marker: { size: 3, color: '#0076be' }
-            }];
-
-            var layout = {
-                title: dateAndTool_NTM18.tool_name + ' Squeegee Pressure',
-                margin: {
-                    l: 50,
-                    r: 40,
-                    b: 50,
-                    t: 50,
-                    pad: 4
-                },
-                xaxis: {
-                    type: 'date',
-                    domain: [0, 1]
-                },
-                yaxis : {
-                    range: [49, 84],
-                    dtick: 5,
-                },
-                shapes: [
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 75.0,
-                        x1: 1,
-                        y1: 75.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    },
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 55.0,
-                        x1: 1,
-                        y1: 55.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    }
-                ],
-                
-            }
-
-            Plotly.plot('NTM18-chart', data, layout, {displayModeBar: false});
-            */
+            
             var update = {
                 x: [[ntm18_obj[0]]],
                 y: [[ntm18_obj[4]]]
             }
 
             Plotly.extendTraces('NTM18-chart', update, [0]);
-        ////socket.emit('ntm18', dateAndTool_NTM18);
         });
         socket.on('<%= process_name %>19_client', function(ntm19_obj){ //  listener
-            //console.log(linear_traces);
-            //console.log(ntm17_obj);
-            /** NTM19 chart 
-            var data = [{
-            x: [],
-            y: [],
-            mode: 'lines',
-            type: 'scatter',
-            showlegend: false,
-            marker: { size: 3,color: '#0076be'}
-            }];
-
-            var layout = {
-                title: dateAndTool_NTM19.tool_name + ' Squeegee Pressure',
-                margin: {
-                    l: 50,
-                    r: 40,
-                    b: 50,
-                    t: 50,
-                    pad: 4
-                },
-                xaxis: {
-                    type: 'date',
-                    domain: [0, 1]
-                },
-                yaxis : {
-                    range: [49, 84],
-                    dtick: 5,
-                },
-                shapes: [
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 75.0,
-                        x1: 1,
-                        y1: 75.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    },
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 55.0,
-                        x1: 1,
-                        y1: 55.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    }
-                ],
-                
-            }
-
-            Plotly.plot('NTM19-chart', data, layout, {displayModeBar: false});
-            */
+            
             var update = {
                 x: [[ntm19_obj[0]]],
                 y: [[ntm19_obj[4]]]
             }
 
             Plotly.extendTraces('NTM19-chart', update, [0]);
-        ////socket.emit('ntm19', dateAndTool_NTM19);
         });
         socket.on('<%= process_name %>1920_client', function(ntm1920_obj){ //  listener
-            //console.log(linear_traces);
-            //console.log(ntm17_obj);
-            /** NTM1920 chart 
-            var data = [{
-            x: [],
-            y: [],
-            mode: 'lines',
-            type: 'scatter',
-            scatter: {color: '#0076be'},
-            showlegend: false,
-            marker: { size: 3, color: '#0076be' }
-            }];
-
-            var layout = {
-                title: dateAndTool_NTM1920.tool_name + ' Squeegee Pressure',
-                margin: {
-                    l: 50,
-                    r: 40,
-                    b: 50,
-                    t: 50,
-                    pad: 4
-                },
-                xaxis: {
-                    type: 'date',
-                    domain: [0, 1]
-                },
-                yaxis : {
-                    range: [49, 84],
-                    dtick: 5,
-                },
-                shapes: [
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 75.0,
-                        x1: 1,
-                        y1: 75.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    },
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 55.0,
-                        x1: 1,
-                        y1: 55.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    }
-                ],
-                
-            }
-
-            Plotly.plot('NTM1920-chart', data, layout, {displayModeBar: false});
-            */
+            
             var update = {
                 x: [[ntm1920_obj[0]]],
                 y: [[ntm1920_obj[4]]]
             }
 
             Plotly.extendTraces('NTM1920-chart', update, [0]);
-        ////socket.emit('ntm1920', dateAndTool_NTM1920);
+       
         });
         socket.on('<%= process_name %>20_client', function(ntm20_obj){ //  listener
-            //console.log(linear_traces);
-            //console.log(ntm17_obj);
-            /** NTM17 chart 
-            var data = [{
-            x: [],
-            y: [],
-            mode: 'lines',
-            type: 'scatter',
-            scatter: {color: '#0076be'},
-            showlegend: false,
-            marker: { size: 3, color: '#0076be' }
-            }];
-
-            var layout = {
-                title: dateAndTool_NTM20.tool_name + ' Squeegee Pressure',
-                margin: {
-                    l: 50,
-                    r: 40,
-                    b: 50,
-                    t: 50,
-                    pad: 4
-                },
-                xaxis: {
-                    type: 'date',
-                    domain: [0, 1]
-                },
-                yaxis : {
-                    range: [49, 84],
-                    dtick: 5,
-                },
-                shapes: [
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 75.0,
-                        x1: 1,
-                        y1: 75.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    },
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 55.0,
-                        x1: 1,
-                        y1: 55.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    }
-                ],
-                
-            }
-
-            Plotly.plot('NTM20-chart', data, layout, {displayModeBar: false});
-            */
+            
             var update = {
                 x: [[ntm20_obj[0]]],
                 y: [[ntm20_obj[4]]]
             }
 
             Plotly.extendTraces('NTM20-chart', update, [0]);
-        ////socket.emit('ntm20', dateAndTool_NTM20);
+        
         });
         socket.on('<%= process_name %>21_client', function(ntm21_obj){ //  listener
-            //console.log(linear_traces);
-            //console.log(ntm17_obj);
-            /** NTM17 chart 
-            var data = [{
-            x: [],
-            y: [],
-            mode: 'lines',
-            type: 'scatter',
-            scatter: {color: '#0076be'},
-            showlegend: false,
-            marker: { size: 3, color: '#0076be' }
-            }];
-
-            var layout = {
-                title: dateAndTool_NTM21.tool_name + ' Squeegee Pressure',
-                margin: {
-                    l: 50,
-                    r: 40,
-                    b: 50,
-                    t: 50,
-                    pad: 4
-                },
-                xaxis: {
-                    type: 'date',
-                    domain: [0, 1]
-                },
-                yaxis : {
-                    range: [49, 84],
-                    dtick: 5,
-                },
-                shapes: [
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 75.0,
-                        x1: 1,
-                        y1: 75.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    },
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 55.0,
-                        x1: 1,
-                        y1: 55.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    }
-                ],
-                
-            }
-
-            Plotly.plot('NTM21-chart', data, layout, {displayModeBar: false});
-            */
+            
             var update = {
                 x: [[ntm21_obj[0]]],
                 y: [[ntm21_obj[4]]]
             }
 
             Plotly.extendTraces('NTM21-chart', update, [0]);
-        ////socket.emit('ntm21', dateAndTool_NTM21);
         });
         socket.on('<%= process_name %>2122_client', function(ntm2122_obj){ //  listener
-            //console.log(linear_traces);
-            //console.log(ntm17_obj);
-            /** NTM17 chart
-            var data = [{
-            x: [],
-            y: [],
-            mode: 'lines',
-            type: 'scatter',
-            scatter: {color: '#0076be'},
-            showlegend: false,
-            marker: { size: 3, color: '#0076be' }
-            }];
-
-            var layout = {
-                title: dateAndTool_NTM2122.tool_name + ' Squeegee Pressure',
-                margin: {
-                    l: 50,
-                    r: 40,
-                    b: 50,
-                    t: 50,
-                    pad: 4
-                },
-                xaxis: {
-                    type: 'date',
-                    domain: [0, 1]
-                },
-                yaxis : {
-                    range: [49, 84],
-                    dtick: 5,
-                },
-                shapes: [
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 75.0,
-                        x1: 1,
-                        y1: 75.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    },
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 55.0,
-                        x1: 1,
-                        y1: 55.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    }
-                ],
-                
-            }
-
-            Plotly.plot('NTM2122-chart', data, layout, {displayModeBar: false});
-             */
+            
             var update = {
                 x: [[ntm2122_obj[0]]],
                 y: [[ntm2122_obj[4]]]
             }
 
             Plotly.extendTraces('NTM2122-chart', update, [0]);
-        ////socket.emit('ntm2122', dateAndTool_NTM2122);
         });
         socket.on('<%= process_name %>22_client', function(ntm22_obj){ //  listener
-            //console.log(linear_traces);
-            //console.log(ntm17_obj);
-            /** NTM17 chart 
-            var data = [{
-            x: [],
-            y: [],
-            mode: 'lines',
-            type: 'scatter',
-            scatter: {color: '#0076be'},
-            showlegend: false,
-            marker: { size: 3, color: '#0076be' }
-            }];
-
-            var layout = {
-                title: dateAndTool_NTM22.tool_name + ' Squeegee Pressure',
-                margin: {
-                    l: 50,
-                    r: 40,
-                    b: 50,
-                    t: 50,
-                    pad: 4
-                },
-                xaxis: {
-                    type: 'date',
-                    domain: [0, 1]
-                },
-                yaxis : {
-                    range: [49, 84],
-                    dtick: 5,
-                },
-                shapes: [
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 75.0,
-                        x1: 1,
-                        y1: 75.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    },
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 55.0,
-                        x1: 1,
-                        y1: 55.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    }
-                ],
-                
-            }
-
-            Plotly.plot('NTM22-chart', data, layout, {displayModeBar: false});
-            */
+            
             var update = {
                 x: [[ntm22_obj[0]]],
                 y: [[ntm22_obj[4]]]
             }
 
             Plotly.extendTraces('NTM22-chart', update, [0]);
-        ////socket.emit('ntm22', dateAndTool_NTM22);
+        
         });
         socket.on('<%= process_name %>22-2_client', function(ntm222_obj){ //  listener
-            //console.log(linear_traces);
-            //console.log(ntm17_obj);
-            /** NTM17 chart 
-            var data = [{
-            x: [],
-            y: [],
-            mode: 'lines',
-            type: 'scatter',
-            scatter: {color: '#0076be'},
-            showlegend: false,
-            marker: { size: 3, color: '#0076be' }
-            }];
-
-            var layout = {
-                title: dateAndTool_NTM222.tool_name + ' Squeegee Pressure',
-                margin: {
-                    l: 50,
-                    r: 40,
-                    b: 50,
-                    t: 50,
-                    pad: 4
-                },
-                xaxis: {
-                    type: 'date',
-                    domain: [0, 1]
-                },
-                yaxis : {
-                    range: [49, 84],
-                    dtick: 5,
-                },
-                shapes: [
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 75.0,
-                        x1: 1,
-                        y1: 75.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    },
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 55.0,
-                        x1: 1,
-                        y1: 55.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    }
-                ],
-                
-            }
-
-            Plotly.plot('NTM22-2-chart', data, layout, {displayModeBar: false});
-            */
+            
             var update = {
                 x: [[ntm222_obj[0]]],
                 y: [[ntm222_obj[4]]]
             }
 
             Plotly.extendTraces('NTM22-2-chart', update, [0]);
-        ////socket.emit('ntm22-2', dateAndTool_NTM222);
         });
         socket.on('<%= process_name %>22-3_client', function(ntm223_obj){ //  listener
-            //console.log(linear_traces);
-            //console.log(ntm17_obj);
-            /** NTM17 chart 
-            var data = [{
-            x: [],
-            y: [],
-            mode: 'lines',
-            type: 'scatter',
-            scatter: {color: '#0076be'},
-            showlegend: false,
-            marker: { size: 3, color: '#0076be' }
-            }];
-
-            var layout = {
-                title: dateAndTool_NTM223.tool_name + ' Squeegee Pressure',
-                margin: {
-                    l: 50,
-                    r: 40,
-                    b: 50,
-                    t: 50,
-                    pad: 4
-                },
-                xaxis: {
-                    type: 'date',
-                    domain: [0, 1]
-                },
-                yaxis : {
-                    range: [49, 84],
-                    dtick: 5,
-                },
-                shapes: [
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 75.0,
-                        x1: 1,
-                        y1: 75.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    },
-                    {
-                        type: 'line',
-                        xref: 'paper',
-                        x0: 0,
-                        y0: 55.0,
-                        x1: 1,
-                        y1: 55.0,
-                        line:{
-                            color: 'rgb(255, 0, 0)',
-                            width: 1,
-                            dash:'dot'
-                        }
-                    }
-                ],
-                
-            }
-
-            Plotly.plot('NTM22-3-chart', data, layout, {displayModeBar: false});
             
-            */
             var update = {
                 x: [[ntm223_obj[0]]],
                 y: [[ntm223_obj[4]]]
             }
 
             Plotly.extendTraces('NTM22-3-chart', update, [0]);
-        ////socket.emit('ntm22-3', dateAndTool_NTM223);
         });
 
     });
