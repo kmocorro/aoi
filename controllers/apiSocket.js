@@ -92,13 +92,16 @@ module.exports = function(io){
                                         sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE process = "NTM" AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
                                         values: [dateToday, dateToday]
                                     }, function(err, results, fields){
-                                    // console.log((results[0].STD_pressure).toFixed(3));
-                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                            let stdev = (results[0].STD_pressure).toFixed(4);
-                                            resolve(stdev);
-                                        } else {
-                                            reject('error in querySTDEV NTM');
+
+                                        if(results){
+                                            if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                let stdev = (results[0].STD_pressure).toFixed(4);
+                                                resolve(stdev);
+                                            } else {
+                                                reject('error in querySTDEV NTM');
+                                            }
                                         }
+                                        
                                     });
 
                                 });
@@ -112,12 +115,16 @@ module.exports = function(io){
                                         sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
                                         values: [data_arr[1], dateToday, dateToday]
                                     }, function(err, results, fields){
-                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                            let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
-                                            resolve(stdev_per_tool);
-                                        } else {
-                                            reject('error in queryEachSTDev NTM');
+
+                                        if(results){
+                                            if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                                resolve(stdev_per_tool);
+                                            } else {
+                                                reject('error in queryEachSTDev NTM');
+                                            }
                                         }
+                                        
                                     });
                                     
                                 });
@@ -221,13 +228,16 @@ module.exports = function(io){
                                                 sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE process = "NTM" AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
                                                 values: [dateToday, dateToday]
                                             }, function(err, results, fields){
-                                            // console.log((results[0].STD_pressure).toFixed(3));
-                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                                    let stdev = (results[0].STD_pressure).toFixed(4);
-                                                    resolve(stdev);
-                                                } else {
-                                                    reject('error in querySTDEV NTM');
+                                            
+                                                if(results){
+                                                    if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                        let stdev = (results[0].STD_pressure).toFixed(4);
+                                                        resolve(stdev);
+                                                    } else {
+                                                        reject('error in querySTDEV NTM');
+                                                    }
                                                 }
+                                                
                                             });
         
                                         });
@@ -241,12 +251,16 @@ module.exports = function(io){
                                                 sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
                                                 values: [data_arr[1], dateToday, dateToday]
                                             }, function(err, results, fields){
-                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                                    let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
-                                                    resolve(stdev_per_tool);
-                                                } else {
-                                                    reject('error in queryEachSTDev NTM');
+
+                                                if(results){
+                                                    if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                        let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                                        resolve(stdev_per_tool);
+                                                    } else {
+                                                        reject('error in queryEachSTDev NTM');
+                                                    }
                                                 }
+                                                
                                             });
                                             
                                         });
@@ -356,13 +370,16 @@ module.exports = function(io){
                                         sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE process = "PTM" AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
                                         values: [dateToday, dateToday]
                                     }, function(err, results, fields){
-                                    // console.log((results[0].STD_pressure).toFixed(3));
-                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                            let stdev = (results[0].STD_pressure).toFixed(4);
-                                            resolve(stdev);
-                                        } else {
-                                            reject('error in querySTDEV PTM');
+
+                                        if(results){
+                                            if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                let stdev = (results[0].STD_pressure).toFixed(4);
+                                                resolve(stdev);
+                                            } else {
+                                                reject('error in querySTDEV PTM');
+                                            }
                                         }
+                                        
                                     });
 
                                 });
@@ -376,12 +393,16 @@ module.exports = function(io){
                                         sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
                                         values: [data_arr[1], dateToday, dateToday]
                                     }, function(err, results, fields){
-                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                            let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
-                                            resolve(stdev_per_tool);
-                                        } else {
-                                            reject('error in queryEachSTDev PTM');
+
+                                        if(results){
+                                            if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                                resolve(stdev_per_tool);
+                                            } else {
+                                                reject('error in queryEachSTDev PTM');
+                                            }
                                         }
+                                        
                                     });
                                     
                                 });
@@ -485,13 +506,16 @@ module.exports = function(io){
                                                 sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE process = "PTM" AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
                                                 values: [dateToday, dateToday]
                                             }, function(err, results, fields){
-                                            // console.log((results[0].STD_pressure).toFixed(3));
-                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                                    let stdev = (results[0].STD_pressure).toFixed(4);
-                                                    resolve(stdev);
-                                                } else {
-                                                    reject('error in querySTDEV PTM');
+
+                                                if(results){
+                                                    if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                        let stdev = (results[0].STD_pressure).toFixed(4);
+                                                        resolve(stdev);
+                                                    } else {
+                                                        reject('error in querySTDEV PTM');
+                                                    }
                                                 }
+                                                
                                             });
         
                                         });
@@ -505,12 +529,16 @@ module.exports = function(io){
                                                 sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
                                                 values: [data_arr[1], dateToday, dateToday]
                                             }, function(err, results, fields){
-                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                                    let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
-                                                    resolve(stdev_per_tool);
-                                                } else {
-                                                    reject('error in queryEachSTDev PTM');
+
+                                                if(results){
+                                                    if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                        let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                                        resolve(stdev_per_tool);
+                                                    } else {
+                                                        reject('error in queryEachSTDev PTM');
+                                                    }
                                                 }
+                                                
                                             });
                                             
                                         });
@@ -621,13 +649,16 @@ module.exports = function(io){
                                         sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE process = "PLM" AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
                                         values: [dateToday, dateToday]
                                     }, function(err, results, fields){
-                                    // console.log((results[0].STD_pressure).toFixed(3));
-                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                            let stdev = (results[0].STD_pressure).toFixed(4);
-                                            resolve(stdev);
-                                        } else {
-                                            reject('error in querySTDEV PLM');
+
+                                        if(results){
+                                            if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                let stdev = (results[0].STD_pressure).toFixed(4);
+                                                resolve(stdev);
+                                            } else {
+                                                reject('error in querySTDEV PLM');
+                                            }
                                         }
+                                        
                                     });
 
                                 });
@@ -641,12 +672,16 @@ module.exports = function(io){
                                         sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
                                         values: [data_arr[1], dateToday, dateToday]
                                     }, function(err, results, fields){
-                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                            let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
-                                            resolve(stdev_per_tool);
-                                        } else {
-                                            reject('error in queryEachSTDev PLM');
+
+                                        if(results){
+                                            if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                                resolve(stdev_per_tool);
+                                            } else {
+                                                reject('error in queryEachSTDev PLM');
+                                            }
                                         }
+                                        
                                     });
                                     
                                 });
@@ -751,13 +786,16 @@ module.exports = function(io){
                                                 sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE process = "PLM" AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
                                                 values: [dateToday, dateToday]
                                             }, function(err, results, fields){
-                                            // console.log((results[0].STD_pressure).toFixed(3));
-                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                                    let stdev = (results[0].STD_pressure).toFixed(4);
-                                                    resolve(stdev);
-                                                } else {
-                                                    reject('error in querySTDEV PLM');
+
+                                                if(results){
+                                                    if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                        let stdev = (results[0].STD_pressure).toFixed(4);
+                                                        resolve(stdev);
+                                                    } else {
+                                                        reject('error in querySTDEV PLM');
+                                                    }
                                                 }
+                                                
                                             });
         
                                         });
@@ -771,12 +809,16 @@ module.exports = function(io){
                                                 sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
                                                 values: [data_arr[1], dateToday, dateToday]
                                             }, function(err, results, fields){
-                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                                    let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
-                                                    resolve(stdev_per_tool);
-                                                } else {
-                                                    reject('error in queryEachSTDev PLM');
+
+                                                if(results){
+                                                    if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                        let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                                        resolve(stdev_per_tool);
+                                                    } else {
+                                                        reject('error in queryEachSTDev PLM');
+                                                    }
                                                 }
+                                                
                                             });
                                             
                                         });
