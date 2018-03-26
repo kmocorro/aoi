@@ -285,8 +285,6 @@ module.exports = function(io){
                         tail.on('error', function(error){
                             console.log(error);
                         });
-                    } else {
-                        console.log(pathToFolder + '\\' + moment(Date.now()).format('YYMMDD') + '_CMYK_PPDataLog.txt is missing');
                     }
                 });
                 
