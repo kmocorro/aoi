@@ -148,6 +148,8 @@
       <h1>
         <%= process_name %>
         <small>realtime</small>
+        <small>|  STDEV: </small>
+        <span id="STD"></span>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -166,6 +168,8 @@
                     <!-- Tabs within a box -->
                     <ul class="nav nav-tabs pull-right">
                         <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 17</li>
+                        <li class="pull-right header"  style="color:darkgrey; size: 10;" >stdev: <small id="<%= process_name %>17_STD"></small></li>
+                        
                     </ul>
                     <div class="tab-content no-padding">
                         <div class="chart tab-pane active" id="NTM17-chart" style=" height: 300px;"></div>
@@ -178,6 +182,7 @@
                     <!-- Tabs within a box -->
                     <ul class="nav nav-tabs pull-right">
                         <li class="pull-left header"><i class="fa fa-bar-chart"></i> <%= process_name %> 1718</li>
+                        <li class="pull-right header"  style="color:darkgrey; size: 10;" >stdev: <small id="<%= process_name %>1718_STD"></small></li>
                     </ul>
                     <div class="tab-content no-padding">
                         <div class="chart tab-pane active" id="NTM1718-chart" style=" height: 300px;"></div>
@@ -190,6 +195,7 @@
                     <!-- Tabs within a box -->
                     <ul class="nav nav-tabs pull-right">
                         <li class="pull-left header"><i class="fa fa-bar-chart"></i> <%= process_name %> 18</li>
+                        <li class="pull-right header"  style="color:darkgrey; size: 10;" >stdev: <small id="<%= process_name %>18_STD"></small></li>
                     </ul>
                     <div class="tab-content no-padding">
                         <div class="chart tab-pane active" id="NTM18-chart" style=" height: 300px;"></div>
@@ -205,6 +211,7 @@
                         <!-- Tabs within a box -->
                         <ul class="nav nav-tabs pull-right">
                             <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 19</li>
+                            <li class="pull-right header"  style="color:darkgrey; size: 10;" >stdev: <small id="<%= process_name %>19_STD"></small></li>
                         </ul>
                         <div class="tab-content no-padding">
                             <div class="chart tab-pane active" id="NTM19-chart" style=" height: 300px;"></div>
@@ -217,6 +224,7 @@
                         <!-- Tabs within a box -->
                         <ul class="nav nav-tabs pull-right">
                             <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 1920</li>
+                            <li class="pull-right header"  style="color:darkgrey; size: 10;" >stdev: <small id="<%= process_name %>1920_STD"></small></li>
                         </ul>
                         <div class="tab-content no-padding">
                             <div class="chart tab-pane active" id="NTM1920-chart" style=" height: 300px;"></div>
@@ -229,6 +237,7 @@
                         <!-- Tabs within a box -->
                         <ul class="nav nav-tabs pull-right">
                             <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 20</li>
+                            <li class="pull-right header"  style="color:darkgrey; size: 10;" >stdev: <small id="<%= process_name %>20_STD"></small></li>
                         </ul>
                         <div class="tab-content no-padding">
                             <div class="chart tab-pane active" id="NTM20-chart" style=" height: 300px;"></div>
@@ -244,6 +253,7 @@
                         <!-- Tabs within a box -->
                         <ul class="nav nav-tabs pull-right">
                             <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 21</li>
+                            <li class="pull-right header"  style="color:darkgrey; size: 10;" >stdev: <small id="<%= process_name %>21_STD"></small></li>
                         </ul>
                         <div class="tab-content no-padding">
                             <div class="chart tab-pane active" id="NTM21-chart" style=" height: 300px;"></div>
@@ -256,6 +266,7 @@
                         <!-- Tabs within a box -->
                         <ul class="nav nav-tabs pull-right">
                             <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 2122</li>
+                            <li class="pull-right header"  style="color:darkgrey; size: 10;" >stdev: <small id="<%= process_name %>2122_STD"></small></li>
                         </ul>
                         <div class="tab-content no-padding">
                             <div class="chart tab-pane active" id="NTM2122-chart" style=" height: 300px;"></div>
@@ -268,6 +279,7 @@
                         <!-- Tabs within a box -->
                         <ul class="nav nav-tabs pull-right">
                             <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 22</li>
+                            <li class="pull-right header"  style="color:darkgrey; size: 10;" >stdev: <small id="<%= process_name %>22_STD"></small></li>
                         </ul>
                         <div class="tab-content no-padding">
                             <div class="chart tab-pane active" id="NTM22-chart" style=" height: 300px;"></div>
@@ -283,6 +295,7 @@
                         <!-- Tabs within a box -->
                         <ul class="nav nav-tabs pull-right">
                             <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 22-2</li>
+                            <li class="pull-right header"  style="color:darkgrey; size: 10;" >stdev: <small id="<%= process_name %>22-2_STD"></small></li>
                         </ul>
                         <div class="tab-content no-padding">
                             <div class="chart tab-pane active" id="NTM22-2-chart" style=" height: 300px;"></div>
@@ -295,6 +308,7 @@
                         <!-- Tabs within a box -->
                         <ul class="nav nav-tabs pull-right">
                             <li class="pull-left header"><i class="fa fa-line-chart"></i> <%= process_name %> 22-3</li>
+                            <li class="pull-right header"  style="color:darkgrey; size: 10;" >stdev: <small id="<%= process_name %>22-3_STD"></small></li>
                         </ul>
                         <div class="tab-content no-padding">
                             <div class="chart tab-pane active" id="NTM22-3-chart" style=" height: 300px;"></div>
@@ -342,6 +356,46 @@
     $(function(){
         var socket=io();
 
+        socket.on('<%= process_name %>_STD', function(std){
+            $('#STD').text(std);
+        });
+
+        socket.on('<%= process_name %>17_STD', function(std){
+            $('#<%= process_name %>17_STD').text(std);
+        });
+        socket.on('<%= process_name %>1718_STD', function(std){
+            $('#<%= process_name %>1718_STD').text(std);
+        });
+        socket.on('<%= process_name %>18_STD', function(std){
+            $('#<%= process_name %>18_STD').text(std);
+        });
+
+        socket.on('<%= process_name %>19_STD', function(std){
+            $('#<%= process_name %>19_STD').text(std);
+        });
+        socket.on('<%= process_name %>1920_STD', function(std){
+            $('#<%= process_name %>1920_STD').text(std);
+        });
+        socket.on('<%= process_name %>20_STD', function(std){
+            $('#<%= process_name %>20_STD').text(std);
+        });
+        
+        socket.on('<%= process_name %>21_STD', function(std){
+            $('#<%= process_name %>21_STD').text(std);
+        });
+        socket.on('<%= process_name %>2122_STD', function(std){
+            $('#<%= process_name %>2122_STD').text(std);
+        });
+        socket.on('<%= process_name %>22_STD', function(std){
+            $('#<%= process_name %>22_STD').text(std);
+        });
+
+        socket.on('<%= process_name %>22-2_STD', function(std){
+            $('#<%= process_name %>22-2_STD').text(std);
+        });
+        socket.on('<%= process_name %>22-3_STD', function(std){
+            $('#<%= process_name %>22-3_STD').text(std);
+        });
         // DATA & LAYOUT
         var data_17 = [{
             x: [],

@@ -51,7 +51,7 @@ module.exports = function(io){
                                            //console.log(pressure_val[1]);
                                            let datetime = moment(new Date(tabs[0] + ' ' + tabs[1])).format();
                                            
-                                           data_arr.push(datetime, logFile_obj.ntm.tool_name[j], tabs[2], nest_val[1].replace(/ /g, ''), pressure_val[1].replace(/ /g, ''));
+                                           data_arr.push(datetime, logFile_obj.ntm.tool_name[j], tabs[2], nest_val[1].replace(/ /g, ''), pressure_val[1].replace(/ /g, ''), 'NTM');
                    
                                            resolve(data_arr);
                                        //console.log(data_arr);
@@ -67,25 +67,73 @@ module.exports = function(io){
                     cleaner().then(function(data_arr){
                            
                         io.volatile.emit(logFile_obj.ntm.tool_name[j] + '_client', data_arr);
+                        
+                        mysqlCloud.poolCloud.getConnection(function(err, connection){
 
-                        function toCloudDB(){
-                            return new Promise(function(resolve, reject){
+                            function toCloudDB(){
+                                return new Promise(function(resolve, reject){
 
-                                mysqlCloud.poolCloud.getConnection(function(err, connection){
                                     connection.query({
-                                        sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?',
-                                        values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4]]
+                                        sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?, process=?',
+                                        values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4], data_arr[5]]
                                     },  function(err, results, fields){
-                                       //console.log('INSERTED!');
+                                        resolve('inserted');
                                     });
-                                    connection.release();
 
                                 });
 
-                            });
-                        }
+                            }
 
-                        toCloudDB();
+                            function querySTDev(){
+                                return new Promise(function(resolve, reject){
+                                    let dateToday = moment(new Date()).format('YYYY-MM-DD');
+                                    
+                                    connection.query({
+                                        sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE process = "NTM" AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
+                                        values: [dateToday, dateToday]
+                                    }, function(err, results, fields){
+                                    // console.log((results[0].STD_pressure).toFixed(3));
+                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                            let stdev = (results[0].STD_pressure).toFixed(4);
+                                            resolve(stdev);
+                                        } else {
+                                            reject('error in querySTDEV NTM');
+                                        }
+                                    });
+
+                                });
+                            }
+
+                            function queryEachSTDev(){
+                                return new Promise(function(resolve, reject){
+                                    let dateToday = moment(new Date()).format('YYYY-MM-DD');
+
+                                    connection.query({
+                                        sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
+                                        values: [data_arr[1], dateToday, dateToday]
+                                    }, function(err, results, fields){
+                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                            let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                            resolve(stdev_per_tool);
+                                        } else {
+                                            reject('error in queryEachSTDev NTM');
+                                        }
+                                    });
+                                    
+                                });
+                            }
+
+                            toCloudDB().then(function(inserted){
+                                return querySTDev().then(function(stdev){
+                                    io.volatile.emit('NTM_STD', stdev);
+                                    return queryEachSTDev().then(function(stdev_per_tool){
+                                        io.volatile.emit([data_arr[1]]+'_STD',  stdev_per_tool);
+                                        connection.release();
+                                    });
+                                });
+                            });
+                        
+                        });
                         
                     });
 
@@ -132,7 +180,7 @@ module.exports = function(io){
                                                    //console.log(pressure_val[1]);
                                                    let datetime = moment(new Date(tabs[0] + ' ' + tabs[1])).format();
                                                    
-                                                   data_arr.push(datetime, logFile_obj.ntm.tool_name[j], tabs[2], nest_val[1].replace(/ /g, ''), pressure_val[1].replace(/ /g, ''));
+                                                   data_arr.push(datetime, logFile_obj.ntm.tool_name[j], tabs[2], nest_val[1].replace(/ /g, ''), pressure_val[1].replace(/ /g, ''), 'NTM');
                            
                                                    resolve(data_arr);
                                                //console.log(data_arr);
@@ -149,24 +197,73 @@ module.exports = function(io){
                            
                                 io.volatile.emit(logFile_obj.ntm.tool_name[j] + '_client', data_arr);
                                 
-                                function toCloudDB(){
-                                    return new Promise(function(resolve, reject){
+                                mysqlCloud.poolCloud.getConnection(function(err, connection){
+
+                                    function toCloudDB(){
+                                        return new Promise(function(resolve, reject){
         
-                                        mysqlCloud.poolCloud.getConnection(function(err, connection){
                                             connection.query({
-                                                sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?',
-                                                values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4]]
+                                                sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?, process=?',
+                                                values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4], data_arr[5]]
                                             },  function(err, results, fields){
-                                               //console.log('INSERTED!');
+                                                resolve('inserted');
                                             });
-                                            connection.release();
         
                                         });
         
-                                    });
-                                }
+                                    }
         
-                                toCloudDB();
+                                    function querySTDev(){
+                                        return new Promise(function(resolve, reject){
+                                            let dateToday = moment(new Date()).format('YYYY-MM-DD');
+                                            
+                                            connection.query({
+                                                sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE process = "NTM" AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
+                                                values: [dateToday, dateToday]
+                                            }, function(err, results, fields){
+                                            // console.log((results[0].STD_pressure).toFixed(3));
+                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                    let stdev = (results[0].STD_pressure).toFixed(4);
+                                                    resolve(stdev);
+                                                } else {
+                                                    reject('error in querySTDEV NTM');
+                                                }
+                                            });
+        
+                                        });
+                                    }
+        
+                                    function queryEachSTDev(){
+                                        return new Promise(function(resolve, reject){
+                                            let dateToday = moment(new Date()).format('YYYY-MM-DD');
+        
+                                            connection.query({
+                                                sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
+                                                values: [data_arr[1], dateToday, dateToday]
+                                            }, function(err, results, fields){
+                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                    let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                                    resolve(stdev_per_tool);
+                                                } else {
+                                                    reject('error in queryEachSTDev NTM');
+                                                }
+                                            });
+                                            
+                                        });
+                                    }
+        
+                                    toCloudDB().then(function(inserted){
+                                        return querySTDev().then(function(stdev){
+                                            io.volatile.emit('NTM_STD', stdev);
+                                            return queryEachSTDev().then(function(stdev_per_tool){
+                                                io.volatile.emit([data_arr[1]]+'_STD',  stdev_per_tool);
+                                                connection.release();
+                                            });
+                                        });
+                                    });
+                                
+                                });
+
                             });
                             
                         });
@@ -218,7 +315,7 @@ module.exports = function(io){
                                            //console.log(pressure_val[1]);
                                            let datetime = moment(new Date(tabs[0] + ' ' + tabs[1])).format();
                                            
-                                           data_arr.push(datetime, logFile_obj.ptm.tool_name[j], tabs[2], nest_val[1].replace(/ /g, ''), pressure_val[1].replace(/ /g, ''));
+                                           data_arr.push(datetime, logFile_obj.ptm.tool_name[j], tabs[2], nest_val[1].replace(/ /g, ''), pressure_val[1].replace(/ /g, ''), 'PTM');
                    
                                            resolve(data_arr);
                                        //console.log(data_arr);
@@ -235,24 +332,72 @@ module.exports = function(io){
                    
                         io.volatile.emit(logFile_obj.ptm.tool_name[j] + '_client', data_arr);
                         
-                        function toCloudDB(){
-                            return new Promise(function(resolve, reject){
+                        mysqlCloud.poolCloud.getConnection(function(err, connection){
 
-                                mysqlCloud.poolCloud.getConnection(function(err, connection){
+                            function toCloudDB(){
+                                return new Promise(function(resolve, reject){
+
                                     connection.query({
-                                        sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?',
-                                        values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4]]
+                                        sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?, process=?',
+                                        values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4], data_arr[5]]
                                     },  function(err, results, fields){
-                                       //console.log('INSERTED!');
+                                        resolve('inserted');
                                     });
-                                    connection.release();
 
                                 });
 
-                            });
-                        }
+                            }
 
-                        toCloudDB();
+                            function querySTDev(){
+                                return new Promise(function(resolve, reject){
+                                    let dateToday = moment(new Date()).format('YYYY-MM-DD');
+                                    
+                                    connection.query({
+                                        sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE process = "PTM" AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
+                                        values: [dateToday, dateToday]
+                                    }, function(err, results, fields){
+                                    // console.log((results[0].STD_pressure).toFixed(3));
+                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                            let stdev = (results[0].STD_pressure).toFixed(4);
+                                            resolve(stdev);
+                                        } else {
+                                            reject('error in querySTDEV PTM');
+                                        }
+                                    });
+
+                                });
+                            }
+
+                            function queryEachSTDev(){
+                                return new Promise(function(resolve, reject){
+                                    let dateToday = moment(new Date()).format('YYYY-MM-DD');
+
+                                    connection.query({
+                                        sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
+                                        values: [data_arr[1], dateToday, dateToday]
+                                    }, function(err, results, fields){
+                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                            let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                            resolve(stdev_per_tool);
+                                        } else {
+                                            reject('error in queryEachSTDev PTM');
+                                        }
+                                    });
+                                    
+                                });
+                            }
+
+                            toCloudDB().then(function(inserted){
+                                return querySTDev().then(function(stdev){
+                                    io.volatile.emit('PTM_STD', stdev);
+                                    return queryEachSTDev().then(function(stdev_per_tool){
+                                        io.volatile.emit([data_arr[1]]+'_STD',  stdev_per_tool);
+                                        connection.release();
+                                    });
+                                });
+                            });
+                        
+                        });
 
                     });
                 });
@@ -299,7 +444,7 @@ module.exports = function(io){
                                                    //console.log(pressure_val[1]);
                                                    let datetime = moment(new Date(tabs[0] + ' ' + tabs[1])).format();
                                                    
-                                                   data_arr.push(datetime, logFile_obj.ptm.tool_name[j], tabs[2], nest_val[1].replace(/ /g, ''), pressure_val[1].replace(/ /g, ''));
+                                                   data_arr.push(datetime, logFile_obj.ptm.tool_name[j], tabs[2], nest_val[1].replace(/ /g, ''), pressure_val[1].replace(/ /g, ''), 'PTM');
                            
                                                    resolve(data_arr);
                                                //console.log(data_arr);
@@ -316,24 +461,73 @@ module.exports = function(io){
                            
                                 io.volatile.emit(logFile_obj.ptm.tool_name[j] + '_client', data_arr);
                                 
-                                function toCloudDB(){
-                                    return new Promise(function(resolve, reject){
+                                mysqlCloud.poolCloud.getConnection(function(err, connection){
+
+                                    function toCloudDB(){
+                                        return new Promise(function(resolve, reject){
         
-                                        mysqlCloud.poolCloud.getConnection(function(err, connection){
                                             connection.query({
-                                                sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?',
-                                                values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4]]
+                                                sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?, process=?',
+                                                values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4], data_arr[5]]
                                             },  function(err, results, fields){
-                                               //console.log('INSERTED!');
+                                                resolve('inserted');
                                             });
-                                            connection.release();
         
                                         });
         
-                                    });
-                                }
+                                    }
         
-                                toCloudDB();
+                                    function querySTDev(){
+                                        return new Promise(function(resolve, reject){
+                                            let dateToday = moment(new Date()).format('YYYY-MM-DD');
+                                            
+                                            connection.query({
+                                                sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE process = "PTM" AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
+                                                values: [dateToday, dateToday]
+                                            }, function(err, results, fields){
+                                            // console.log((results[0].STD_pressure).toFixed(3));
+                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                    let stdev = (results[0].STD_pressure).toFixed(4);
+                                                    resolve(stdev);
+                                                } else {
+                                                    reject('error in querySTDEV PTM');
+                                                }
+                                            });
+        
+                                        });
+                                    }
+        
+                                    function queryEachSTDev(){
+                                        return new Promise(function(resolve, reject){
+                                            let dateToday = moment(new Date()).format('YYYY-MM-DD');
+        
+                                            connection.query({
+                                                sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
+                                                values: [data_arr[1], dateToday, dateToday]
+                                            }, function(err, results, fields){
+                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                    let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                                    resolve(stdev_per_tool);
+                                                } else {
+                                                    reject('error in queryEachSTDev PTM');
+                                                }
+                                            });
+                                            
+                                        });
+                                    }
+        
+                                    toCloudDB().then(function(inserted){
+                                        return querySTDev().then(function(stdev){
+                                            io.volatile.emit('PTM_STD', stdev);
+                                            return queryEachSTDev().then(function(stdev_per_tool){
+                                                io.volatile.emit([data_arr[1]]+'_STD',  stdev_per_tool);
+                                                connection.release();
+                                            });
+                                        });
+                                    });
+                                
+                                });
+
                             });
                         });
                 
@@ -386,7 +580,7 @@ module.exports = function(io){
                                            //console.log(pressure_val[1]);
                                            let datetime = moment(new Date(tabs[0] + ' ' + tabs[1])).format();
                                            
-                                           data_arr.push(datetime, logFile_obj.plm.tool_name[j], tabs[2], nest_val[1].replace(/ /g, ''), pressure_val[1].replace(/ /g, ''));
+                                           data_arr.push(datetime, logFile_obj.plm.tool_name[j], tabs[2], nest_val[1].replace(/ /g, ''), pressure_val[1].replace(/ /g, ''), 'PLM');
                    
                                            resolve(data_arr);
                                        //console.log(data_arr);
@@ -403,24 +597,73 @@ module.exports = function(io){
                    
                         io.volatile.emit(logFile_obj.plm.tool_name[j] + '_client', data_arr);
                         
-                        function toCloudDB(){
-                            return new Promise(function(resolve, reject){
+                        mysqlCloud.poolCloud.getConnection(function(err, connection){
 
-                                mysqlCloud.poolCloud.getConnection(function(err, connection){
+                            function toCloudDB(){
+                                return new Promise(function(resolve, reject){
+
                                     connection.query({
-                                        sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?',
-                                        values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4]]
+                                        sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?, process=?',
+                                        values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4], data_arr[5]]
                                     },  function(err, results, fields){
-                                       //console.log('INSERTED!');
+                                        resolve('inserted');
                                     });
-                                    connection.release();
 
                                 });
 
-                            });
-                        }
+                            }
 
-                        toCloudDB();
+                            function querySTDev(){
+                                return new Promise(function(resolve, reject){
+                                    let dateToday = moment(new Date()).format('YYYY-MM-DD');
+                                    
+                                    connection.query({
+                                        sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE process = "PLM" AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
+                                        values: [dateToday, dateToday]
+                                    }, function(err, results, fields){
+                                    // console.log((results[0].STD_pressure).toFixed(3));
+                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                            let stdev = (results[0].STD_pressure).toFixed(4);
+                                            resolve(stdev);
+                                        } else {
+                                            reject('error in querySTDEV PLM');
+                                        }
+                                    });
+
+                                });
+                            }
+
+                            function queryEachSTDev(){
+                                return new Promise(function(resolve, reject){
+                                    let dateToday = moment(new Date()).format('YYYY-MM-DD');
+
+                                    connection.query({
+                                        sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
+                                        values: [data_arr[1], dateToday, dateToday]
+                                    }, function(err, results, fields){
+                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                            let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                            resolve(stdev_per_tool);
+                                        } else {
+                                            reject('error in queryEachSTDev PLM');
+                                        }
+                                    });
+                                    
+                                });
+                            }
+
+                            toCloudDB().then(function(inserted){
+                                return querySTDev().then(function(stdev){
+                                    io.volatile.emit('PLM_STD', stdev);
+                                    return queryEachSTDev().then(function(stdev_per_tool){
+                                        io.volatile.emit([data_arr[1]]+'_STD',  stdev_per_tool);
+                                        connection.release();
+                                    });
+                                });
+                            });
+                        
+                        });
+
                     });
                 });
         
@@ -467,7 +710,7 @@ module.exports = function(io){
                                                    //console.log(pressure_val[1]);
                                                    let datetime = moment(new Date(tabs[0] + ' ' + tabs[1])).format();
                                                    
-                                                   data_arr.push(datetime, logFile_obj.plm.tool_name[j], tabs[2], nest_val[1].replace(/ /g, ''), pressure_val[1].replace(/ /g, ''));
+                                                   data_arr.push(datetime, logFile_obj.plm.tool_name[j], tabs[2], nest_val[1].replace(/ /g, ''), pressure_val[1].replace(/ /g, ''), 'PLM');
                            
                                                    resolve(data_arr);
                                                //console.log(data_arr);
@@ -484,24 +727,73 @@ module.exports = function(io){
                            
                                 io.volatile.emit(logFile_obj.plm.tool_name[j] + '_client', data_arr);
                                 
-                                function toCloudDB(){
-                                    return new Promise(function(resolve, reject){
+                                mysqlCloud.poolCloud.getConnection(function(err, connection){
+
+                                    function toCloudDB(){
+                                        return new Promise(function(resolve, reject){
         
-                                        mysqlCloud.poolCloud.getConnection(function(err, connection){
                                             connection.query({
-                                                sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?',
-                                                values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4]]
+                                                sql: 'INSERT INTO tbl_patterning_cmyk_logs SET date_time =?, tool_name =?, log_type=?, nest=?, pressure=?, process=?',
+                                                values: [data_arr[0], data_arr[1], data_arr[2], data_arr[3], data_arr[4], data_arr[5]]
                                             },  function(err, results, fields){
-                                               //console.log('INSERTED!');
+                                                resolve('inserted');
                                             });
-                                            connection.release();
         
                                         });
         
-                                    });
-                                }
+                                    }
         
-                                toCloudDB();
+                                    function querySTDev(){
+                                        return new Promise(function(resolve, reject){
+                                            let dateToday = moment(new Date()).format('YYYY-MM-DD');
+                                            
+                                            connection.query({
+                                                sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE process = "PLM" AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
+                                                values: [dateToday, dateToday]
+                                            }, function(err, results, fields){
+                                            // console.log((results[0].STD_pressure).toFixed(3));
+                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                    let stdev = (results[0].STD_pressure).toFixed(4);
+                                                    resolve(stdev);
+                                                } else {
+                                                    reject('error in querySTDEV PLM');
+                                                }
+                                            });
+        
+                                        });
+                                    }
+        
+                                    function queryEachSTDev(){
+                                        return new Promise(function(resolve, reject){
+                                            let dateToday = moment(new Date()).format('YYYY-MM-DD');
+        
+                                            connection.query({
+                                                sql: 'SELECT STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59")',
+                                                values: [data_arr[1], dateToday, dateToday]
+                                            }, function(err, results, fields){
+                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
+                                                    let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                                    resolve(stdev_per_tool);
+                                                } else {
+                                                    reject('error in queryEachSTDev PLM');
+                                                }
+                                            });
+                                            
+                                        });
+                                    }
+        
+                                    toCloudDB().then(function(inserted){
+                                        return querySTDev().then(function(stdev){
+                                            io.volatile.emit('PLM_STD', stdev);
+                                            return queryEachSTDev().then(function(stdev_per_tool){
+                                                io.volatile.emit([data_arr[1]]+'_STD',  stdev_per_tool);
+                                                connection.release();
+                                            });
+                                        });
+                                    });
+                                
+                                });
+
                             });
                         });
                 
