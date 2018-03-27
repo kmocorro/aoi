@@ -546,7 +546,7 @@ module.exports = function(io){
         
     }
 
-
+    // socket connection per process and nest to nest per tool standard deviation 
     io.on('connection', function(socket){
 
         for(let i=0; i<logFile_obj.ntm.tool_name.length; i++){
