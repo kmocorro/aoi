@@ -425,7 +425,7 @@
         var socket=io();
 
         // STD NEST PER TOOL
-
+        socket.emit('<%= process_name %>17_nestTonest', {go: 'go'});
         socket.on('<%= process_name %>17_STD_NEST_PER_TOOL', function(std){
 
             if(std[0].stdev > 2 ){
@@ -457,8 +457,11 @@
             $('#<%= process_name %>17_STD_NEST_2').text((std[1].stdev).toFixed(1));
             $('#<%= process_name %>17_STD_NEST_3').text((std[2].stdev).toFixed(1));
             $('#<%= process_name %>17_STD_NEST_4').text((std[3].stdev).toFixed(1));
+
+            socket.emit('<%= process_name %>17_nestTonest', {go: 'go'});
         });
 
+        socket.emit('<%= process_name %>1718_nestTonest', {go: 'go'});
         socket.on('<%= process_name %>1718_STD_NEST_PER_TOOL', function(std){
 
             if(std[0].stdev > 2 ){
@@ -490,8 +493,10 @@
             $('#<%= process_name %>1718_STD_NEST_2').text((std[1].stdev).toFixed(1));
             $('#<%= process_name %>1718_STD_NEST_3').text((std[2].stdev).toFixed(1));
             $('#<%= process_name %>1718_STD_NEST_4').text((std[3].stdev).toFixed(1));
+            socket.emit('<%= process_name %>1718_nestTonest', {go: 'go'});
         });
-        
+
+        socket.emit('<%= process_name %>18_nestTonest', {go: 'go'});
         socket.on('<%= process_name %>18_STD_NEST_PER_TOOL', function(std){
 
             if(std[0].stdev > 2 ){
@@ -523,8 +528,10 @@
             $('#<%= process_name %>18_STD_NEST_2').text((std[1].stdev).toFixed(1));
             $('#<%= process_name %>18_STD_NEST_3').text((std[2].stdev).toFixed(1));
             $('#<%= process_name %>18_STD_NEST_4').text((std[3].stdev).toFixed(1));
+            socket.emit('<%= process_name %>18_nestTonest', {go: 'go'});
         });
 
+        socket.emit('<%= process_name %>19_nestTonest', {go: 'go'});
         socket.on('<%= process_name %>19_STD_NEST_PER_TOOL', function(std){
 
             if(std[0].stdev > 2 ){
@@ -556,8 +563,10 @@
             $('#<%= process_name %>19_STD_NEST_2').text((std[1].stdev).toFixed(1));
             $('#<%= process_name %>19_STD_NEST_3').text((std[2].stdev).toFixed(1));
             $('#<%= process_name %>19_STD_NEST_4').text((std[3].stdev).toFixed(1));
+            socket.emit('<%= process_name %>19_nestTonest', {go: 'go'});
         });
-
+        
+        socket.emit('<%= process_name %>1920_nestTonest', {go: 'go'});
         socket.on('<%= process_name %>1920_STD_NEST_PER_TOOL', function(std){
 
             if(std[0].stdev > 2 ){
@@ -589,8 +598,45 @@
             $('#<%= process_name %>1920_STD_NEST_2').text((std[1].stdev).toFixed(1));
             $('#<%= process_name %>1920_STD_NEST_3').text((std[2].stdev).toFixed(1));
             $('#<%= process_name %>1920_STD_NEST_4').text((std[3].stdev).toFixed(1));
+            socket.emit('<%= process_name %>1920_nestTonest', {go: 'go'});
+        });
+        
+        socket.emit('<%= process_name %>20_nestTonest', {go: 'go'});
+        socket.on('<%= process_name %>20_STD_NEST_PER_TOOL', function(std){
+
+            if(std[0].stdev > 2 ){
+                document.getElementsByName("<%= process_name %>20_STD_NEST_1")[0].setAttribute("class", "label label-danger");
+            } else {
+                document.getElementsByName("<%= process_name %>20_STD_NEST_1")[0].setAttribute("class", "label label-default");
+            }
+
+            if(std[1].stdev > 2 ){
+                document.getElementsByName("<%= process_name %>20_STD_NEST_2")[0].setAttribute("class", "label label-danger");
+            } else {
+                document.getElementsByName("<%= process_name %>20_STD_NEST_2")[0].setAttribute("class", "label label-default");
+            }
+
+            if(std[2].stdev > 2 ){
+                document.getElementsByName("<%= process_name %>20_STD_NEST_3")[0].setAttribute("class", "label label-danger");
+            } else {
+                document.getElementsByName("<%= process_name %>20_STD_NEST_3")[0].setAttribute("class", "label label-default");
+            }
+
+            if(std[3].stdev > 2 ){
+                document.getElementsByName("<%= process_name %>20_STD_NEST_4")[0].setAttribute("class", "label label-danger");
+            } else {
+                document.getElementsByName("<%= process_name %>20_STD_NEST_4")[0].setAttribute("class", "label label-default");
+            }
+
+
+            $('#<%= process_name %>20_STD_NEST_1').text((std[0].stdev).toFixed(1));
+            $('#<%= process_name %>20_STD_NEST_2').text((std[1].stdev).toFixed(1));
+            $('#<%= process_name %>20_STD_NEST_3').text((std[2].stdev).toFixed(1));
+            $('#<%= process_name %>20_STD_NEST_4').text((std[3].stdev).toFixed(1));
+            socket.emit('<%= process_name %>20_nestTonest', {go: 'go'});
         });
 
+        socket.emit('<%= process_name %>21_nestTonest', {go: 'go'});
         socket.on('<%= process_name %>21_STD_NEST_PER_TOOL', function(std){
 
             if(std[0].stdev > 2 ){
@@ -622,8 +668,10 @@
             $('#<%= process_name %>21_STD_NEST_2').text((std[1].stdev).toFixed(1));
             $('#<%= process_name %>21_STD_NEST_3').text((std[2].stdev).toFixed(1));
             $('#<%= process_name %>21_STD_NEST_4').text((std[3].stdev).toFixed(1));
+            socket.emit('<%= process_name %>21_nestTonest', {go: 'go'});
         });
 
+        socket.emit('<%= process_name %>2122_nestTonest', {go: 'go'});
         socket.on('<%= process_name %>2122_STD_NEST_PER_TOOL', function(std){
 
             if(std[0].stdev > 2 ){
@@ -655,8 +703,10 @@
             $('#<%= process_name %>2122_STD_NEST_2').text((std[1].stdev).toFixed(1));
             $('#<%= process_name %>2122_STD_NEST_3').text((std[2].stdev).toFixed(1));
             $('#<%= process_name %>2122_STD_NEST_4').text((std[3].stdev).toFixed(1));
+            socket.emit('<%= process_name %>2122_nestTonest', {go: 'go'});
         });
-
+        
+        socket.emit('<%= process_name %>22_nestTonest', {go: 'go'});
         socket.on('<%= process_name %>22_STD_NEST_PER_TOOL', function(std){
 
             if(std[0].stdev > 2 ){
@@ -688,8 +738,10 @@
             $('#<%= process_name %>22_STD_NEST_2').text((std[1].stdev).toFixed(1));
             $('#<%= process_name %>22_STD_NEST_3').text((std[2].stdev).toFixed(1));
             $('#<%= process_name %>22_STD_NEST_4').text((std[3].stdev).toFixed(1));
+            socket.emit('<%= process_name %>22_nestTonest', {go: 'go'});
         });
-
+        
+        socket.emit('<%= process_name %>22-2_nestTonest', {go: 'go'});
         socket.on('<%= process_name %>22-2_STD_NEST_PER_TOOL', function(std){
 
             if(std[0].stdev > 2 ){
@@ -721,8 +773,10 @@
             $('#<%= process_name %>22-2_STD_NEST_2').text((std[1].stdev).toFixed(1));
             $('#<%= process_name %>22-2_STD_NEST_3').text((std[2].stdev).toFixed(1));
             $('#<%= process_name %>22-2_STD_NEST_4').text((std[3].stdev).toFixed(1));
+            socket.emit('<%= process_name %>22-2_nestTonest', {go: 'go'});
         });
-
+        
+        socket.emit('<%= process_name %>22-3_nestTonest', {go: 'go'});
         socket.on('<%= process_name %>22-3_STD_NEST_PER_TOOL', function(std){
 
             if(std[0].stdev > 2 ){
@@ -754,11 +808,12 @@
             $('#<%= process_name %>22-3_STD_NEST_2').text((std[1].stdev).toFixed(1));
             $('#<%= process_name %>22-3_STD_NEST_3').text((std[2].stdev).toFixed(1));
             $('#<%= process_name %>22-3_STD_NEST_4').text((std[3].stdev).toFixed(1));
+            socket.emit('<%= process_name %>22-3_nestTonest', {go: 'go'});
         });
 
 
         // STD
-        socket.on('NTM_STD', function(std){
+        socket.on('<%= process_name %>_STD', function(std){
             $('#STD').text(std);
         });
 
