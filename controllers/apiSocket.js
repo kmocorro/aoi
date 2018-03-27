@@ -301,12 +301,48 @@ module.exports = function(io){
                                             
                                         });
                                     }
+
+                                    function queryEachNestToNestSTDev(){ // nest to nest
+                                        return new Promise(function(resolve, reject){
+                                            let dateToday = moment(new Date()).format('YYYY-MM-DD');
+                                            
+                                            connection.query({
+                                                sql: 'SELECT tool_name, nest, STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59") GROUP BY nest',
+                                                values: [data_arr[1], dateToday, dateToday]
+                                            },  function(err, results, fields){
+                                                    if(results){
+                                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length >0){
+                                                            
+                                                            let stdev_per_tool_per_nest = [];
+        
+                                                            for(let i = 0; i <results.length; i++){
+        
+                                                                stdev_per_tool_per_nest.push({
+                                                                    tool_name: results[i].tool_name,
+                                                                    nest: results[i].nest,
+                                                                    stdev: results[i].STD_pressure
+                                                                });
+                                                                
+                                                                if(i == 3){
+                                                                    resolve(stdev_per_tool_per_nest);
+                                                                }
+                                                                
+                                                            }
+                                                        }
+                                                    }
+                                            });
+        
+                                        });
+                                    }
         
                                     toCloudDB().then(function(inserted){
                                         return querySTDev().then(function(stdev){
                                             io.volatile.emit('NTM_STD', stdev);
                                             return queryEachSTDev().then(function(stdev_per_tool){
                                                 io.volatile.emit([data_arr[1]]+'_STD',  stdev_per_tool);
+                                                return queryEachNestToNestSTDev().then(function(stdev_per_tool_per_nest){
+                                                    io.volatile.emit([data_arr[1]]+'_STD_NEST_PER_TOOL',  stdev_per_tool_per_nest);
+                                                });
                                                 connection.release();
                                             });
                                         });
@@ -442,11 +478,47 @@ module.exports = function(io){
                                 });
                             }
 
+                            function queryEachNestToNestSTDev(){ // nest to nest
+                                return new Promise(function(resolve, reject){
+                                    let dateToday = moment(new Date()).format('YYYY-MM-DD');
+                                    
+                                    connection.query({
+                                        sql: 'SELECT tool_name, nest, STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59") GROUP BY nest',
+                                        values: [data_arr[1], dateToday, dateToday]
+                                    },  function(err, results, fields){
+                                            if(results){
+                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length >0){
+                                                    
+                                                    let stdev_per_tool_per_nest = [];
+
+                                                    for(let i = 0; i <results.length; i++){
+
+                                                        stdev_per_tool_per_nest.push({
+                                                            tool_name: results[i].tool_name,
+                                                            nest: results[i].nest,
+                                                            stdev: results[i].STD_pressure
+                                                        });
+                                                        
+                                                        if(i == 3){
+                                                            resolve(stdev_per_tool_per_nest);
+                                                        }
+                                                        
+                                                    }
+                                                }
+                                            }
+                                    });
+
+                                });
+                            }
+
                             toCloudDB().then(function(inserted){
                                 return querySTDev().then(function(stdev){
                                     io.volatile.emit('PTM_STD', stdev);
                                     return queryEachSTDev().then(function(stdev_per_tool){
                                         io.volatile.emit([data_arr[1]]+'_STD',  stdev_per_tool);
+                                        return queryEachNestToNestSTDev().then(function(stdev_per_tool_per_nest){
+                                            io.volatile.emit([data_arr[1]]+'_STD_NEST_PER_TOOL',  stdev_per_tool_per_nest);
+                                        });
                                         connection.release();
                                     });
                                 });
@@ -577,12 +649,48 @@ module.exports = function(io){
                                             
                                         });
                                     }
+
+                                    function queryEachNestToNestSTDev(){ // nest to nest
+                                        return new Promise(function(resolve, reject){
+                                            let dateToday = moment(new Date()).format('YYYY-MM-DD');
+                                            
+                                            connection.query({
+                                                sql: 'SELECT tool_name, nest, STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59") GROUP BY nest',
+                                                values: [data_arr[1], dateToday, dateToday]
+                                            },  function(err, results, fields){
+                                                    if(results){
+                                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length >0){
+                                                            
+                                                            let stdev_per_tool_per_nest = [];
+        
+                                                            for(let i = 0; i <results.length; i++){
+        
+                                                                stdev_per_tool_per_nest.push({
+                                                                    tool_name: results[i].tool_name,
+                                                                    nest: results[i].nest,
+                                                                    stdev: results[i].STD_pressure
+                                                                });
+                                                                
+                                                                if(i == 3){
+                                                                    resolve(stdev_per_tool_per_nest);
+                                                                }
+                                                                
+                                                            }
+                                                        }
+                                                    }
+                                            });
+        
+                                        });
+                                    }
         
                                     toCloudDB().then(function(inserted){
                                         return querySTDev().then(function(stdev){
                                             io.volatile.emit('PTM_STD', stdev);
                                             return queryEachSTDev().then(function(stdev_per_tool){
                                                 io.volatile.emit([data_arr[1]]+'_STD',  stdev_per_tool);
+                                                return queryEachNestToNestSTDev().then(function(stdev_per_tool_per_nest){
+                                                    io.volatile.emit([data_arr[1]]+'_STD_NEST_PER_TOOL',  stdev_per_tool_per_nest);
+                                                });
                                                 connection.release();
                                             });
                                         });
@@ -721,11 +829,47 @@ module.exports = function(io){
                                 });
                             }
 
+                            function queryEachNestToNestSTDev(){ // nest to nest
+                                return new Promise(function(resolve, reject){
+                                    let dateToday = moment(new Date()).format('YYYY-MM-DD');
+                                    
+                                    connection.query({
+                                        sql: 'SELECT tool_name, nest, STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59") GROUP BY nest',
+                                        values: [data_arr[1], dateToday, dateToday]
+                                    },  function(err, results, fields){
+                                            if(results){
+                                                if(typeof results[0] != 'undefined' && results[0] != null && results.length >0){
+                                                    
+                                                    let stdev_per_tool_per_nest = [];
+
+                                                    for(let i = 0; i <results.length; i++){
+
+                                                        stdev_per_tool_per_nest.push({
+                                                            tool_name: results[i].tool_name,
+                                                            nest: results[i].nest,
+                                                            stdev: results[i].STD_pressure
+                                                        });
+                                                        
+                                                        if(i == 3){
+                                                            resolve(stdev_per_tool_per_nest);
+                                                        }
+                                                        
+                                                    }
+                                                }
+                                            }
+                                    });
+
+                                });
+                            }
+
                             toCloudDB().then(function(inserted){
                                 return querySTDev().then(function(stdev){
                                     io.volatile.emit('PLM_STD', stdev);
                                     return queryEachSTDev().then(function(stdev_per_tool){
                                         io.volatile.emit([data_arr[1]]+'_STD',  stdev_per_tool);
+                                        return queryEachNestToNestSTDev().then(function(stdev_per_tool_per_nest){
+                                            io.volatile.emit([data_arr[1]]+'_STD_NEST_PER_TOOL',  stdev_per_tool_per_nest);
+                                        });
                                         connection.release();
                                     });
                                 });
@@ -857,12 +1001,48 @@ module.exports = function(io){
                                             
                                         });
                                     }
+
+                                    function queryEachNestToNestSTDev(){ // nest to nest
+                                        return new Promise(function(resolve, reject){
+                                            let dateToday = moment(new Date()).format('YYYY-MM-DD');
+                                            
+                                            connection.query({
+                                                sql: 'SELECT tool_name, nest, STD(pressure) as STD_pressure FROM fab4_apps_db.tbl_patterning_cmyk_logs WHERE tool_name=? AND date_time >= CONCAT(?," 00:00:00") && date_time <= CONCAT(?," 23:59:59") GROUP BY nest',
+                                                values: [data_arr[1], dateToday, dateToday]
+                                            },  function(err, results, fields){
+                                                    if(results){
+                                                        if(typeof results[0] != 'undefined' && results[0] != null && results.length >0){
+                                                            
+                                                            let stdev_per_tool_per_nest = [];
+        
+                                                            for(let i = 0; i <results.length; i++){
+        
+                                                                stdev_per_tool_per_nest.push({
+                                                                    tool_name: results[i].tool_name,
+                                                                    nest: results[i].nest,
+                                                                    stdev: results[i].STD_pressure
+                                                                });
+                                                                
+                                                                if(i == 3){
+                                                                    resolve(stdev_per_tool_per_nest);
+                                                                }
+                                                                
+                                                            }
+                                                        }
+                                                    }
+                                            });
+        
+                                        });
+                                    }
         
                                     toCloudDB().then(function(inserted){
                                         return querySTDev().then(function(stdev){
                                             io.volatile.emit('PLM_STD', stdev);
                                             return queryEachSTDev().then(function(stdev_per_tool){
                                                 io.volatile.emit([data_arr[1]]+'_STD',  stdev_per_tool);
+                                                return queryEachNestToNestSTDev().then(function(stdev_per_tool_per_nest){
+                                                    io.volatile.emit([data_arr[1]]+'_STD_NEST_PER_TOOL',  stdev_per_tool_per_nest);
+                                                });
                                                 connection.release();
                                             });
                                         });
