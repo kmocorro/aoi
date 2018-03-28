@@ -600,7 +600,7 @@ module.exports = function(io){
 
                                 if(results){
                                     if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                        let stdev = (results[0].STD_pressure).toFixed(4);
+                                        let stdev = (results[0].STD_pressure).toFixed(1);
                                         resolve(stdev);
                                     } else {
                                         reject('error in querySTDEV NTM');
@@ -623,7 +623,7 @@ module.exports = function(io){
 
                                 if(results){
                                     if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                        let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                        let stdev_per_tool = (results[0].STD_pressure).toFixed(1);
                                         resolve(stdev_per_tool);
                                     } else {
                                         reject('error in queryEachSTDev NTM');
@@ -705,7 +705,7 @@ module.exports = function(io){
 
                                 if(results){
                                     if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                        let stdev = (results[0].STD_pressure).toFixed(4);
+                                        let stdev = (results[0].STD_pressure).toFixed(1);
                                         resolve(stdev);
                                     } else {
                                         reject('error in querySTDEV PTM');
@@ -728,7 +728,7 @@ module.exports = function(io){
 
                                 if(results){
                                     if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                        let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                        let stdev_per_tool = (results[0].STD_pressure).toFixed(1);
                                         resolve(stdev_per_tool);
                                     } else {
                                         reject('error in queryEachSTDev PTM');
@@ -808,7 +808,7 @@ module.exports = function(io){
 
                                 if(results){
                                     if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                        let stdev = (results[0].STD_pressure).toFixed(4);
+                                        let stdev = (results[0].STD_pressure).toFixed(1);
                                         resolve(stdev);
                                     } else {
                                         reject('error in querySTDEV PLM');
@@ -831,7 +831,7 @@ module.exports = function(io){
 
                                 if(results){
                                     if(typeof results[0] != 'undefined' && results[0] != null && results.length > 0){
-                                        let stdev_per_tool = (results[0].STD_pressure).toFixed(4);
+                                        let stdev_per_tool = (results[0].STD_pressure).toFixed(1);
                                         resolve(stdev_per_tool);
                                     } else {
                                         reject('error in queryEachSTDev PLM');
